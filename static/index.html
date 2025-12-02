@@ -14,7 +14,7 @@
 
         body {
             background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)),
-                         url('admin.jpg') center/cover no-repeat;
+                         url('/static/admin.jpg') center/cover no-repeat;
             height: 100vh;
             display: flex;
             justify-content: center;
@@ -236,7 +236,7 @@
     <div class="container">
         <!-- University Logo - Now with Dark Professional Outline -->
         <div class="university-logo">
-            <img src="aror_logo.png" alt="Aror University Logo">
+            <img src="/static/aror_logo.png" alt="Aror University Logo">
         </div>
 
         <h1>Welcome to Aror University Chatbot</h1>
@@ -282,7 +282,7 @@
             document.querySelector('.container').style.animation = 'containerAppear 0.6s ease-in reverse forwards';
 
             setTimeout(() => {
-                window.location.href = 'first_page.html';
+                window.location.href = '/static/first_page.html';
             }, 600);
         }
 
@@ -291,7 +291,4 @@
     </script>
 </body>
 </html>
-
-
-
 
