@@ -17,30 +17,48 @@ class ArorUniversityChatbot {
         this.userInput.focus();
     }
 
-    async loadJSONData() {
+     async loadJSONData() {
         try {
-            // Assuming your JSON is available as a variable or in a file
-            // If it's in a file, use: const response = await fetch('./aror_data.json');
-            // For now, I'll assume the JSON is assigned to a variable called `arorData`
-
-            if (typeof arorData !== 'undefined') {
-                this.jsonData = arorData;
-                console.log('JSON data loaded successfully:', this.jsonData.length + ' questions loaded');
+            // Load JSON from data folder
+            console.log('📁 Trying to load: data/university_data.json');
+            const response = await fetch('data/university_data.json');
+            
+            if (response.ok) {
+                this.jsonData = await response.json();
+                console.log('✅ JSON loaded:', this.jsonData.length + ' questions');
+                
+                // Test: Show first question
+                if (this.jsonData.length > 0) {
+                    console.log('Sample question:', this.jsonData[0].question);
+                    console.log('Sample answer:', this.jsonData[0].answer);
+                }
+                
+                // Also check for VC question specifically
+                const vcQuestion = this.jsonData.find(item => 
+                    item.question.toLowerCase().includes('vc') || 
+                    item.question.toLowerCase().includes('vice chancellor')
+                );
+                if (vcQuestion) {
+                    console.log('✅ VC question found:', vcQuestion.question);
+                } else {
+                    console.log('⚠️ No VC question found in JSON');
+                }
             } else {
-                // Fallback: use the JSON you provided directly
-                this.jsonData = [
-                  {
-                    "id": "1",
-                    "question": "What is the name of the university?",
-                    "answer": "Aror University of Art, Architecture, Design & Heritage, Sukkur"
-                  },
-                  // ... include all your JSON data here
-                  // For production, better to load from external file
-                ];
-                console.log('Using embedded JSON data:', this.jsonData.length + ' questions loaded');
+                console.error('❌ JSON file not found at data/university_data.json');
+                console.log('Trying alternative path: /data/university_data.json');
+                
+                // Try alternative path
+                const response2 = await fetch('/data/university_data.json');
+                if (response2.ok) {
+                    this.jsonData = await response2.json();
+                    console.log('✅ JSON loaded from alternative path');
+                } else {
+                    this.jsonData = [];
+                }
             }
         } catch (error) {
-            console.error('Error loading JSON data:', error);
+            console.error('❌ Error loading JSON:', error);
+            console.log('Error details:', error.message);
             this.jsonData = [];
         }
     }
@@ -280,4 +298,5 @@ For specific queries, please contact us directly at 📱 0325-2278377 or email a
 // Initialize chatbot when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     new ArorUniversityChatbot();
+
 });
