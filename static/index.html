@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Aror University Chatbot</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)),
+                         url('/static/admin.jpg') center/cover no-repeat;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Very light overlay for maximum background visibility */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.1);
+            z-index: -1;
+        }
+
+        .container {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(8px);
+            padding: 50px 40px;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            max-width: 550px;
+            width: 90%;
+            animation: containerAppear 1.2s ease-out;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @keyframes containerAppear {
+            0% {
+                opacity: 0;
+                transform: translateY(60px) scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .university-logo {
+            width: 160px;
+            height: 160px;
+            margin: 0 auto 25px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.4);  /* Darker background */
+            border: 4px solid rgba(0, 0, 0, 0.6);  /* Dark outline instead of white */
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4),
+                        0 0 0 1px rgba(255, 255, 255, 0.1);  /* Subtle inner glow */
+            overflow: hidden;
+            animation: logoFloat 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes logoFloat {
+            0% {
+                transform: translateY(0px);
+            }
+            100% {
+                transform: translateY(-8px);
+            }
+        }
+
+        .university-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            filter: brightness(0.95) contrast(1.1);  /* Slightly brighter for dark border */
+        }
+
+        h1 {
+            color: white;
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            text-shadow: 0 3px 12px rgba(0, 0, 0, 0.6);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .creators {
+            color: white;
+            font-size: 1.1rem;
+            margin-bottom: 35px;
+            font-weight: 500;
+            animation: fadeIn 2s ease-in;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+            border: none;
+            padding: 16px 45px;
+            font-size: 1.3rem;
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 6px 20px rgba(139, 69, 19, 0.4);
+            position: relative;
+            overflow: hidden;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            animation: pulse 2.5s infinite;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 10px 25px rgba(139, 69, 19, 0.6);
+            animation: none;
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        .btn:active {
+            transform: translateY(0) scale(1);
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 6px 20px rgba(139, 69, 19, 0.4);
+            }
+            50% {
+                transform: scale(1.03);
+                box-shadow: 0 8px 22px rgba(139, 69, 19, 0.6);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 6px 20px rgba(139, 69, 19, 0.4);
+            }
+        }
+
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .floating-element {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-1200px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 30px;
+            }
+
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            .creators {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 14px 35px;
+                font-size: 1.1rem;
+            }
+
+            .university-logo {
+                width: 140px;
+                height: 140px;
+                border: 3px solid rgba(0, 0, 0, 0.6);  /* Dark outline for mobile */
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .container {
+                padding: 30px 20px;
+            }
+
+            .university-logo {
+                width: 130px;
+                height: 130px;
+                border: 3px solid rgba(0, 0, 0, 0.6);  /* Dark outline for small mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-elements" id="floatingElements"></div>
+
+    <div class="container">
+        <!-- University Logo - Now with Dark Professional Outline -->
+        <div class="university-logo">
+            <img src="/static/aror_logo.png" alt="Aror University Logo">
+        </div>
+
+        <h1>Welcome to Aror University Chatbot</h1>
+        <p class="creators">Created by Asim Raza and Sarasvati Devi</p>
+        <button class="btn" onclick="navigateToFirstPage()">Click Me</button>
+    </div>
+
+    <script>
+        // Create floating elements
+        function createFloatingElements() {
+            const container = document.getElementById('floatingElements');
+            const colors = [
+                'rgba(255,255,255,0.08)',
+                'rgba(255,255,255,0.12)',
+                'rgba(255,255,255,0.05)'
+            ];
+
+            for (let i = 0; i < 15; i++) {
+                const element = document.createElement('div');
+                element.classList.add('floating-element');
+
+                // Random properties
+                const size = Math.random() * 70 + 15;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const left = Math.random() * 100;
+                const animationDuration = Math.random() * 25 + 15;
+                const animationDelay = Math.random() * 8;
+
+                element.style.width = `${size}px`;
+                element.style.height = `${size}px`;
+                element.style.background = color;
+                element.style.left = `${left}%`;
+                element.style.animationDuration = `${animationDuration}s`;
+                element.style.animationDelay = `${animationDelay}s`;
+
+                container.appendChild(element);
+            }
+        }
+
+        // Navigate to first page
+        function navigateToFirstPage() {
+            // Add transition effect before navigating
+            document.querySelector('.container').style.animation = 'containerAppear 0.6s ease-in reverse forwards';
+
+            setTimeout(() => {
+                window.location.href = '/static/first_page.html';
+            }, 600);
+        }
+
+        // Initialize floating elements when page loads
+        window.onload = createFloatingElements;
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aror University Chatbot</title>
+
+    <!-- ✅ Correct path for FastAPI static mount -->
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="chat-container">
+        <!-- Background Picture -->
+        <div class="chat-background"></div>
+
+        <!-- Header Section with University Logo -->
+        <div class="chat-header">
+            <div class="university-logo">
+                <!-- ✅ Correct static path -->
+                <img src="/static/aror_logo.png" alt="Aror University Logo">
+            </div>
+            <div class="header-text">
+                <h1>Aror University</h1>
+                <p>Art, Architecture, Design & Heritage</p>
+            </div>
+            <div class="status-indicator">
+                <div class="status-dot"></div>
+                <span>Online</span>
+            </div>
+        </div>
+
+        <!-- Messages Container -->
+        <div class="chat-messages" id="chat-messages">
+            <div class="message bot-message">
+                <div class="message-content">
+                    <div class="message-sender">Aror Assistant</div>
+                    Hello! I'm your Aror University assistant. I can help you with admissions, courses, fees, faculty information, and more. How can I assist you today?
+                </div>
+                <div class="message-time">Just now</div>
+            </div>
+        </div>
+
+        <!-- Input Section -->
+        <div class="chat-input">
+            <div class="input-container">
+                <input type="text" id="user-input" placeholder="Type your question about Aror University..." autocomplete="off">
+                <button id="send-button" class="send-button">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ✅ Correct static path for JS -->
+    <script src="/static/script.js"></script>
+</body>
+</html>
